@@ -4,7 +4,7 @@ default: build
 IMG_NAME = lightdf_framework
 VERSION = 0.1
 DEV_DIR = /Users/andrew/Code/LightDF/lightdf_framework
-CONTAINER_DIR = /usr/share/lightdf_framework
+CONTAINER_DIR = /usr/share/lightdf_framework/
 CONTAINER_NAME = lightdf_framework
 CONTAINER_BIN_DIR = /usr/bin
 PORT_EXPOSE = 3000### Do not expose a port to the world in production - should only be accessible inside the container infrasctructure... but this access is needed for test.
@@ -29,7 +29,7 @@ test: test_static test_dynamic
 
 build: test_static
 	@echo "v---- Building container ----v"
-	docker build --build-arg CONTAINER_DIR=$(CONTAINER_DIR) -t $(IMG_NAME):$(VERSION) $(DEV_DIR)
+	docker build -t $(IMG_NAME):$(VERSION) $(DEV_DIR)
 
 runDev:
 	docker run -d --name $(CONTAINER_NAME) -p $(PORT_EXPOSE):$(PORT_INTERNAL) --link $(LINK_TO_CONTAINER):$(LINK_TO_CONTAINER) -v $(DEV_DIR):$(CONTAINER_DIR) $(IMG_NAME):$(VERSION)

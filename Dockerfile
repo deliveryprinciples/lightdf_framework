@@ -1,7 +1,7 @@
 #FROM node:6.4.0
 FROM alpine:3.4
 
-ARG CONTAINER_DIR
+ENV CONTAINER_DIR /usr/share/lightdf_framework
 
 RUN apk update && apk add nodejs-lts && mkdir -p $CONTAINER_DIR && cd $CONTAINER_DIR
 WORKDIR $CONTAINER_DIR
